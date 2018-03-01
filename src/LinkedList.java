@@ -27,9 +27,24 @@ public final class LinkedList<T> {
         }
 
         public void advance(int pos) {
-            while (pos != 0) {
-                this.node = this.node.next;
-                --pos;
+            if (pos < 0)
+                this.advance(-pos);
+            else {
+                while (pos != 0) {
+                    this.node = this.node.next;
+                    --pos;
+                }
+            }
+        }
+
+        public void goback(int pos) {
+            if (pos < 0)
+                this.advance(-pos);
+            else {
+                while (pos != 0) {
+                    this.node = this.node.prev;
+                    --pos;
+                }
             }
         }
     }
