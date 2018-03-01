@@ -2,14 +2,16 @@ public final class LinkedList<T> {
     class Node {
         public T value;
         public Node next;
+        public Node prev;
 
-        public Node(T value, Node next) {
+        public Node(T value, Node next, Node prev) {
             this.value = value;
             this.next = next;
+            this.next = prev;
         }
 
         public Node(T value) {
-            this(value, null);
+            this(value, null, null);
         }
 
         public boolean hasNext() {
@@ -47,7 +49,7 @@ public final class LinkedList<T> {
     }
 
     public void addHead(T value) {
-        Node new_head = new Node(value, head);
+        Node new_head = new Node(value, head, null);
         this.head = new_head;
         ++this.size;
     }
@@ -55,6 +57,7 @@ public final class LinkedList<T> {
     public void addTail(T value) {
         Node new_tail = new Node(value);
         this.tail.next = new_tail;
+        new_tail.prev = this.tail;
         this.tail = new_tail;
         ++this.size;
     }
@@ -76,6 +79,7 @@ public final class LinkedList<T> {
         it_before_insertion.advance(pos - 1);
         Node node_before_insertion = it_before_insertion.node;
         new_node.next = node_before_insertion.next;
+        new_node.prev = node_before_insertion;
         node_before_insertion.next = new_node;
         ++this.size;
     }
