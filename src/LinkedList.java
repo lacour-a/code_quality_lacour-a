@@ -40,6 +40,9 @@ public final class LinkedList<T> {
         this.size = 0;
     }
 
+
+    // Iterators
+
     public Iterator begin() {
         return new Iterator(this.head);
     }
@@ -47,6 +50,9 @@ public final class LinkedList<T> {
     public Iterator end() {
         return new Iterator(this.tail);
     }
+
+
+    // Modifiers
 
     public void addHead(T value) {
         Node new_head = new Node(value, head, null);
