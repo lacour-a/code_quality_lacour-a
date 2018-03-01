@@ -71,6 +71,25 @@ public final class LinkedList<T> {
     }
 
 
+    // Accessors
+
+    public T head() {
+        return this.head.value;
+    }
+
+    public T tail() {
+        return this.tail.value;
+    }
+
+    public T getAtPosition(int pos) throws IndexOutOfBoundsException {
+        if (pos >= this.size || pos < 0)
+            throw new IndexOutOfBoundsException();
+        Iterator it = this.begin();
+        it.advance(pos);
+        return it.node.value;
+    }
+
+
     // Modifiers
 
     public void addHead(T value) {
