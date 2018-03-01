@@ -1,4 +1,6 @@
 public final class LinkedList<T> {
+    static public final int INDEX_NOT_FOUND = -1;
+
     class Node {
         public T value;
         public Node next;
@@ -87,6 +89,30 @@ public final class LinkedList<T> {
         Iterator it = this.begin();
         it.advance(pos);
         return it.node.value;
+    }
+
+    public int findFirst(T value) {
+        return this.findPosition(value, 1);
+    }
+
+    public int findPosition(T value, int nth) throws IllegalArgumentException {
+        if (nth == 0)
+            throw new IllegalArgumentException();
+
+        Iterator it = this.begin();
+        final Iterator end_it = this.end();
+        int index = 0;
+        while (it != end_it) {
+            if (it.node.value.equals(value)) {
+                if (nth == 1)
+                    return index;
+                else
+                    --nth;
+            }
+            it.advance(1);
+            ++index;
+        }
+        return INDEX_NOT_FOUND;
     }
 
 
