@@ -17,6 +17,10 @@ public final class LinkedList<T> {
         public boolean hasNext() {
             return this.next != null;
         }
+
+        public boolean hasPrev() {
+            return this.prev != null;
+        }
     }
 
     public class Iterator {
@@ -103,6 +107,32 @@ public final class LinkedList<T> {
         new_node.prev = node_before_insertion;
         node_before_insertion.next = new_node;
         ++this.size;
+    }
+
+    public void removeAtPosition(int pos) {
+        Iterator remove_it = this.begin();
+        remove_it.advance(pos);
+        this.removeAt(remove_it);
+    }
+
+    public Iterator removeAt(Iterator it) {
+        Node node_to_remove = it.node;
+        if (node_to_remove.hasNext())
+            node_to_remove.next.prev = node_to_remove.prev;
+        if (node_to_remove.hasPrev())
+            node_to_remove.prev.next = node_to_remove.next;
+        --this.size;
+        return new Iterator(node_to_remove.next);
+    }
+
+    public void removeValue(T value) {
+        Iterator it = this.begin();
+        while (it != this.end()) {
+            if (it.node.value.equals(value))
+                it.advance(1);
+            else
+                it = this.removeAt(it);
+        }
     }
 
     private Node head;
