@@ -26,7 +26,7 @@ public final class LinkedList<T> {
     }
 
     public class Iterator {
-        public Node node;
+        private Node node;
 
         public Iterator(Node node) {
             this.node = node;
@@ -69,7 +69,7 @@ public final class LinkedList<T> {
     }
 
     public Iterator end() {
-        return new Iterator(this.tail);
+        return new Iterator(null);
     }
 
 
@@ -92,25 +92,32 @@ public final class LinkedList<T> {
     }
 
     public int findFirst(T value) {
-        return this.findPosition(value, 1);
+        return this.findFirstFromPosition(value, 0);
     }
 
-    public int findPosition(T value, int nth) throws IllegalArgumentException {
+    public int findNthPosition(T value, int nth) throws IllegalArgumentException {
         if (nth == 0)
             throw new IllegalArgumentException();
 
+        int current_position = 0;
+        for (int i = 0; i < nth; ++i, ++current_position) {
+            current_position = this.findFirstFromPosition(value, current_position);
+            if (current_position == INDEX_NOT_FOUND)
+                return INDEX_NOT_FOUND;
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public int findFirstFromPosition(T value, int start_position) {
         Iterator it = this.begin();
+        it.advance(start_position);
         final Iterator end_it = this.end();
-        int index = 0;
+        int current_position = start_position;
         while (it != end_it) {
-            if (it.node.value.equals(value)) {
-                if (nth == 1)
-                    return index;
-                else
-                    --nth;
-            }
+            if (it.node.value.equals(value))
+                return current_position;
             it.advance(1);
-            ++index;
+            ++current_position;
         }
         return INDEX_NOT_FOUND;
     }
