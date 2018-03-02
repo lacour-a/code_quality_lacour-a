@@ -1,4 +1,4 @@
-public final class LinkedList<T> {
+public final class LinkedList<T extends Comparable<T>> {
     static public final int INDEX_NOT_FOUND = -1;
 
     class Node {
@@ -22,6 +22,12 @@ public final class LinkedList<T> {
 
         public boolean hasPrev() {
             return this.prev != null;
+        }
+
+        public void swapWith(Node other_node) {
+            T temporary = this.value;
+            this.value = other_node.value;
+            other_node.value = temporary;
         }
     }
 
@@ -196,6 +202,24 @@ public final class LinkedList<T> {
             else
                 it = this.removeAt(it);
         }
+    }
+
+    public void sortAscending() {
+        while (this.doOneBubbleSortIteration());
+    }
+
+    // Returns true when the container has changed.
+    private boolean doOneBubbleSortIteration() {
+        Node current_node = this.head;
+        boolean has_changed = false;
+        while (current_node.next != null) {
+            if (current_node.value.compareTo(current_node.next.value) > 0) {
+                current_node.swapWith(current_node.next);
+                has_changed = true;
+            }
+            current_node = current_node.next;
+        }
+        return has_changed;
     }
 
     private Node head;
