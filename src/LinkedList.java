@@ -34,7 +34,7 @@ public final class LinkedList<T> {
 
         public void advance(int pos) {
             if (pos < 0)
-                this.advance(-pos);
+                this.goback(-pos);
             else {
                 while (pos != 0) {
                     this.node = this.node.next;
