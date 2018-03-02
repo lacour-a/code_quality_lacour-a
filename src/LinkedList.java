@@ -123,6 +123,17 @@ public final class LinkedList<T> {
     }
 
 
+    // Size
+
+    public int size() {
+        return this.size;
+    }
+
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+
     // Modifiers
 
     public void addHead(T value) {
