@@ -13,9 +13,13 @@ public class Main {
   private static void weather(String cityName, int numberOfDays) {
     try {
       Forecast forecast = WeatherProvider.getForecast(cityName);
-      List<Forecast> forecasts = new ArrayList<>();
-      forecasts.add(forecast);
-      System.out.println(TableDisplayer.forecastsToString(numberOfDays, forecasts));
+      if (forecast == null) {
+        System.err.println("Unable to retrieve forecast");
+      } else {
+        List<Forecast> forecasts = new ArrayList<>();
+        forecasts.add(forecast);
+        System.out.println(TableDisplayer.forecastsToString(numberOfDays, forecasts));
+      }
     } catch (Exception exception) {
       System.err.println("An error happened: " + exception.getMessage());
     }
