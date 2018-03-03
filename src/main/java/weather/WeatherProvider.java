@@ -4,16 +4,19 @@ import com.google.gson.JsonArray;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import static weather.JsonUtils.getJsonArrayFromString;
 
 public class WeatherProvider {
 
-  public static Forecast getForecast(String city) {
+  public static Forecast getForecast(String city) throws UnsupportedEncodingException {
     return getForecastFromId(getIdFromLocation(city));
   }
 
@@ -29,8 +32,10 @@ public class WeatherProvider {
     return forecast;
   }
 
-  public static int getIdFromLocation(String city) {
+  public static int getIdFromLocation(String city) throws UnsupportedEncodingException {
     int ret = LOCATION_NOT_FOUND_ID;
+
+    city = URLEncoder.encode(city, "UTF-8");
     String apiUrl = String.format("https://www.metaweather.com/api/location/search/?query=%s", city);
 
     String apiAnswer = getApiAnswer(apiUrl);
