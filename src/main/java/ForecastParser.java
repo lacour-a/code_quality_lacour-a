@@ -17,7 +17,8 @@ public class ForecastParser {
 
     for (JsonElement day : forecastArray) {
       JsonObject dayObj = day.getAsJsonObject();
-      DayForecast dayForecast = new DayForecast(dayObj.get("min_temp").getAsDouble(), dayObj.get("max_temp").getAsDouble());
+      DayForecast dayForecast = new DayForecast(dayObj.get("min_temp").getAsDouble(),
+              dayObj.get("max_temp").getAsDouble());
       fc.daysForecast.add(dayForecast);
     }
     return (fc);
