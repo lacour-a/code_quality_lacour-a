@@ -5,6 +5,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import static weather.JsonUtils.getJsonObjectFromString;
+
 public class ForecastParser {
 
   public static Forecast parseForecastJson(String provider, String jsonString) {
@@ -25,13 +27,4 @@ public class ForecastParser {
     }
     return (fc);
   }
-
-  private static JsonObject getJsonObjectFromString(String jsonString) {
-    Gson gson = new Gson();
-    JsonElement jsonElementlem = gson.fromJson(jsonString, JsonElement.class);
-    JsonObject jsonObject = jsonElementlem.getAsJsonObject();
-    return (jsonObject);
-  }
-
-
 }
