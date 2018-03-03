@@ -1,5 +1,8 @@
 package weather;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
   private static void displayUsage() {
     System.out.println("Usage: weather.jar <city-name> [-j <number-of-days>]");
@@ -7,7 +10,10 @@ public class Main {
   }
 
   private static void weather(String cityName, int numberOfDays) {
-
+    Forecast forecast = WeatherProvider.getForecast(cityName);
+    List<Forecast> forecasts = new ArrayList<>();
+    forecasts.add(forecast);
+    System.out.println(TableDisplayer.forecastsToString(numberOfDays, forecasts));
   }
 
   public static void main(String[] args) {
