@@ -1,3 +1,5 @@
+package weather;
+
 import com.google.gson.JsonElement;
 
 public class DayForecast {
