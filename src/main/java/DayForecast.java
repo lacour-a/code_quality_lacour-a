@@ -1,3 +1,5 @@
+import com.google.gson.JsonElement;
+
 public class DayForecast {
 
   private Double minTemp;

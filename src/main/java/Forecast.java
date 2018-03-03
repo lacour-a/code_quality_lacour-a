@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Forecast {
@@ -26,5 +27,12 @@ public class Forecast {
 
   public void setProvider(String provider) {
     this.provider = provider;
+  }
+
+  public void addDay(DayForecast dayForecast) {
+    if (daysForecast == null) {
+      daysForecast = new ArrayList<DayForecast>();
+    }
+    daysForecast.add(dayForecast);
   }
 }
