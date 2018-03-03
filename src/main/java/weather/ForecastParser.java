@@ -14,7 +14,7 @@ public class ForecastParser {
   }
 
   private static Forecast getMetaWeatherForecast(String provider, String jsonString) {
-    Forecast fc = new Forecast(provider);
+    Forecast forecast = new Forecast(provider);
 
     JsonObject mainObject = getJsonObjectFromString(jsonString);
     JsonArray forecastArray = mainObject.getAsJsonArray("consolidated_weather");
@@ -23,8 +23,8 @@ public class ForecastParser {
       JsonObject dayObj = day.getAsJsonObject();
       DayForecast dayForecast = new DayForecast(dayObj.get("min_temp").getAsDouble(),
               dayObj.get("max_temp").getAsDouble());
-      fc.daysForecast.add(dayForecast);
+      forecast.daysForecast.add(dayForecast);
     }
-    return (fc);
+    return forecast;
   }
 }

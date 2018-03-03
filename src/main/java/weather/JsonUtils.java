@@ -12,13 +12,13 @@ public class JsonUtils {
     Gson gson = new Gson();
     JsonElement jsonElement = gson.fromJson(jsonString, JsonElement.class);
     JsonObject jsonObject = jsonElement.getAsJsonObject();
-    return (jsonObject);
+    return jsonObject;
   }
 
   public static JsonArray getJsonArrayFromString(String jsonString) {
     Gson gson = new Gson();
     JsonElement jsonElement = gson.fromJson(jsonString, JsonElement.class);
     JsonArray jsonObject = jsonElement.getAsJsonArray();
-    return (jsonObject);
+    return jsonObject;
   }
 }

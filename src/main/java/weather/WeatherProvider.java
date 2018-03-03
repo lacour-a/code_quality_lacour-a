@@ -17,20 +17,20 @@ public class WeatherProvider {
     return getForecastFromId(getIdFromLocation(city));
   }
 
-
+  public static final int LOCATION_NOT_FOUND_ID = -1;
 
   public static Forecast getForecastFromId(int id) {
-    Forecast fc = new Forecast();
+    Forecast forecast;
     String apiUrl = String.format("https://www.metaweather.com/api/location/%s", String.valueOf(id));
 
     String apiAnswer = getApiAnswer(apiUrl);
-    fc = ForecastParser.parseForecastJson("MetaWeather", apiAnswer.toString());
+    forecast = ForecastParser.parseForecastJson("MetaWeather", apiAnswer.toString());
 
-    return (fc);
+    return forecast;
   }
 
   public static int getIdFromLocation(String city) {
-    int ret = 0;
+    int ret = LOCATION_NOT_FOUND_ID;
     String apiUrl = String.format("https://www.metaweather.com/api/location/search/?query=%s", city);
 
     String apiAnswer = getApiAnswer(apiUrl);
@@ -39,7 +39,7 @@ public class WeatherProvider {
     if (answerJsonObj.size() > 0) {
       ret = answerJsonObj.get(0).getAsJsonObject().get("woeid").getAsInt();
     }
-    return (ret);
+    return ret;
   }
 
   private static String getApiAnswer(String url) {
@@ -49,16 +49,15 @@ public class WeatherProvider {
       HttpGet request = new HttpGet(url);
       HttpResponse response = client.execute(request);
 
-      BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-
-      jsonAnswer = new StringBuffer("");
       String line;
-      while ((line = rd.readLine()) != null) {
+      jsonAnswer = new StringBuffer("");
+      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+      while ((line = bufferedReader.readLine()) != null) {
         jsonAnswer.append(line);
       }
     } catch (Exception e) {
 
     }
-    return (jsonAnswer.toString());
+    return jsonAnswer.toString();
   }
 }
