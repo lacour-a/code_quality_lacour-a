@@ -1,5 +1,6 @@
 package weather;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +11,14 @@ public class Main {
   }
 
   private static void weather(String cityName, int numberOfDays) {
-    Forecast forecast = WeatherProvider.getForecast(cityName);
-    List<Forecast> forecasts = new ArrayList<>();
-    forecasts.add(forecast);
-    System.out.println(TableDisplayer.forecastsToString(numberOfDays, forecasts));
+    try {
+      Forecast forecast = WeatherProvider.getForecast(cityName);
+      List<Forecast> forecasts = new ArrayList<>();
+      forecasts.add(forecast);
+      System.out.println(TableDisplayer.forecastsToString(numberOfDays, forecasts));
+    } catch (Exception exception) {
+      System.err.println("An error happened: " + exception.getMessage());
+    }
   }
 
   public static void main(String[] args) {
