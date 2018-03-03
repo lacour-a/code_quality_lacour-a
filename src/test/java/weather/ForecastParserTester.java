@@ -1,10 +1,12 @@
 package weather;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import org.junit.Test;
-
-import java.io.UnsupportedEncodingException;
 
 public class ForecastParserTester {
 
@@ -20,7 +22,11 @@ public class ForecastParserTester {
 
   @Test
   public void testGetWoeid() throws UnsupportedEncodingException {
-    int idNewYork = WeatherProvider.getIdFromLocation("New York");
-    assertEquals(2459115, idNewYork);
+    try {
+      int idNewYork = WeatherProvider.getIdFromLocation("New York");
+      assertEquals(2459115, idNewYork);
+    } catch (IOException exception) {
+      fail();
+    }
   }
 }

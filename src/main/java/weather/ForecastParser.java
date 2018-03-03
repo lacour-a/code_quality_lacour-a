@@ -1,11 +1,10 @@
 package weather;
 
-import com.google.gson.Gson;
+import static weather.JsonUtils.getJsonObjectFromString;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
-import static weather.JsonUtils.getJsonObjectFromString;
 
 public class ForecastParser {
 
