@@ -14,7 +14,7 @@ import static weather.JsonUtils.getJsonArrayFromString;
 public class WeatherProvider {
 
   public static Forecast getForecast(String city) {
-    return (null);
+    return getForecastFromId(getIdFromLocation(city));
   }
 
 
