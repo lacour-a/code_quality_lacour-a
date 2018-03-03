@@ -105,7 +105,7 @@ public class TableDisplayer {
   }
 
   private static String getTemperatureString(DayForecast dayForecast) {
-    return String.format("%d°-%d°",
+    return String.format("%dC-%dC",
             dayForecast.minTemp.intValue(),
             dayForecast.maxTemp.intValue());
   }

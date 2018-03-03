@@ -31,7 +31,7 @@ public class TableDisplayerTest {
     expectedBuilder.append("+------------+--------+\n");
     expectedBuilder.append("|            | J+0    |\n");
     expectedBuilder.append("+------------+--------+\n");
-    expectedBuilder.append("| MyProvider | 1°-2°  |\n");
+    expectedBuilder.append("| MyProvider | 1C-2C  |\n");
     expectedBuilder.append("+------------+--------+\n");
     String result = TableDisplayer.forecastsToString(1, this.forecasts);
     assertEquals(expectedBuilder.toString(), result);
@@ -43,7 +43,7 @@ public class TableDisplayerTest {
     expectedBuilder.append("+------------+--------+--------+\n");
     expectedBuilder.append("|            | J+0    | J+1    |\n");
     expectedBuilder.append("+------------+--------+--------+\n");
-    expectedBuilder.append("| MyProvider | 1°-2°  | 2°-3°  |\n");
+    expectedBuilder.append("| MyProvider | 1C-2C  | 2C-3C  |\n");
     expectedBuilder.append("+------------+--------+--------+\n");
     String result = TableDisplayer.forecastsToString(2, this.forecasts);
     assertEquals(expectedBuilder.toString(), result);
